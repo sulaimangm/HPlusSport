@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HPlusSport.API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HPlusSport.API.Controllers
 {
@@ -6,10 +7,18 @@ namespace HPlusSport.API.Controllers
     [ApiController]
     public class ProductsController : Controller
     {
-        [HttpGet]
-        public string GetProducts()
+        private readonly ShopContext _context;
+
+        public ProductsController(ShopContext context)
         {
-            return "OK";
+            _context = context;
+            _context.Database.EnsureCreated();
+        }
+
+        [HttpGet]
+        public ActionResult GetAllProducts()
+        {
+            return Ok(_context.Products.ToArray());
         }
     }
 }

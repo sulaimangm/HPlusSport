@@ -2,7 +2,7 @@
 
 namespace HPlusSport.API.Models
 {
-    public class ModelBuilderExtensions
+    public static class ModelBuilderExtensions
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
