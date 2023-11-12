@@ -1,5 +1,6 @@
 ﻿using HPlusSport.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HPlusSport.API.Controllers
 {
@@ -16,15 +17,15 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAllProducts()
+        public async Task<ActionResult> GetAllProducts()
         {
-            return Ok(_context.Products.ToArray());
+            return Ok(await _context.Products.ToArrayAsync());
         }
         [HttpGet]
         [Route("{id}")]
-        public ActionResult GetProduct(int id)
+        public async Task<ActionResult> GetProduct(int id)
         {
-            var product = _context.Products.FirstOrDefault(x => x.Id == id);
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
             return product == null ? NotFound() : Ok(product);
         }
     }
