@@ -24,7 +24,8 @@ namespace HPlusSport.API.Controllers
         [Route("{id}")]
         public ActionResult GetProduct(int id)
         {
-            return Ok(_context.Products.FirstOrDefault(p => p.Id == id));  
+            var product = _context.Products.FirstOrDefault(x => x.Id == id);
+            return product == null ? NotFound() : Ok(product);
         }
     }
 }
